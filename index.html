@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/index.css">
+    <title>Busca el numero</title>
+</head>
+
+<body>
+
+    <header id="contenidor">
+            <h1>Busca el numero de l'1 al 20</h1>
+            <button id="reinicia" onclick="reinicia()">Reinicia!</button>
+    </header>
+
+    <main id="main">
+        <h3>Busca el numero!</h3>
+        <div><p id="interrogant">?</p></div>
+        <h3 id="t">Comencem la partida...</h3>
+    </main>
+
+    <footer id="footer">
+        <div id="inp">
+            <input type="number"  id="num">
+            <button id="prova" onclick="prova()">Prova!</button>
+        </div>
+        <div id="ui">Últims intents: <span id="last"></span> </div>
+        <div id="jugades">
+            <div>💯 Jugades: <span id="int">20</span> </div>
+            <div>🥇 Total Punts: <span id="p">0</span> </div>
+        </div>
+    </footer>
+
+    <script>
+
+        let numeroAleatorio = Math.floor(Math.random() * 20) + 1;
+        console.log(numeroAleatorio);
+
+        function prova(){   
+
+            let num = parseInt(document.getElementById("num").value);
+            let intents = document.getElementById("int").innerHTML;
+            let titol = document.getElementById("t").innerHTML;
+            let punts = document.getElementById("p").innerHTML;
+
+        
+            //Ultims intents
+            if (intents>1){
+                last.innerHTML= last.innerHTML+ String(num)+","; 
+            }else{
+                last.innerHTML= last.innerHTML+ String(num);
+            }
+            
+ 
+            if(num==numeroAleatorio){
+
+                document.getElementById("main").style.backgroundColor = "#90EE90";
+                document.getElementById("footer").style.backgroundColor = "#90EE90";
+                document.getElementById("interrogant").innerHTML=numeroAleatorio
+                t.innerHTML="El numero és correcte";
+                punts= Number(punts)+ Number(intents);
+                p.innerHTML= punts;
+
+            }
+
+            if(num!=numeroAleatorio){
+
+                intents=intents-1;
+                document.getElementById("int").innerHTML= intents;
+
+                if(num>numeroAleatorio){ t.innerHTML= "El numero és massa gran"}
+                if(num<numeroAleatorio){ t.innerHTML= "El numero és massa petit"}
+
+            }
+
+            if(isNaN(Number(num))){
+                alert("Incorrecte"); 
+                intents = document.getElementById("int").innerHTML="20";
+            }
+
+            if(intents===0){
+
+                document.getElementById("main").style.backgroundColor = "#ff0000";
+                document.getElementById("footer").style.backgroundColor = "#ff0000";
+                t.innerHTML= "Has perdut";
+                document.getElementById("prova").disabled = true;
+
+            }
+
+            document.getElementById("num").value = "";
+
+
+        }
+
+        function reinicia(){
+        
+            let num = document.getElementById("num").value="";  
+            document.getElementById("interrogant").innerHTML="?"
+            document.getElementById("main").style.backgroundColor = "#000000";
+            document.getElementById("footer").style.backgroundColor = "#000000";
+            intents = document.getElementById("int").innerHTML="20";
+            t.innerHTML= "Comencem la partida..."
+            last.innerHTML="";
+            numeroAleatorio=Math.floor(Math.random() * 20) + 1;
+            console.log("Reiniciat");
+            console.log(numeroAleatorio);
+            document.getElementById("prova").disabled = false;
+
+        }
+
+    </script>
+</body>
+</html>
